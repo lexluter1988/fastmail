@@ -29,7 +29,7 @@ export AWS_SECRET_ACCESS_KEY=<secret>
 Send message from REPL
 
 ```python
-from backends.base import EmailMessage
+from base.message import EmailMessage
 
 try:
     message = EmailMessage(
