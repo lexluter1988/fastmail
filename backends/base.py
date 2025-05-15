@@ -6,6 +6,7 @@ from typing import Type
 
 from backends.registry import registry
 from backends.ses import AwsSesEmailBackend
+from backends.unisender_go import UnisenderGoEmailBackend
 
 if typing.TYPE_CHECKING:
     from base.message import EmailMessage, EmailServiceProtocol
@@ -36,6 +37,10 @@ class BaseEmailBackend:
                 region_name=os.getenv('AWS_REGION_NAME'),
                 access_key=os.getenv('AWS_ACCESS_KEY_ID'),
                 secret_key=os.getenv('AWS_SECRET_ACCESS_KEY'),
+            )
+        elif service_type == 'unisender_go':
+            _default_service = UnisenderGoEmailBackend(
+                api_key=os.getenv('UNISENDER_GO_API_KEY'),
             )
         else:
             raise ValueError(f"Unsupported service type in environment: {service_type}")
